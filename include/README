@@ -1,39 +1,32 @@
+sample code for remember
 
-This directory is intended for project header files.
 
-A header file is a file containing C declarations and macro definitions
-to be shared between several project source files. You request the use of a
-header file in your project source file (C, C++, etc) located in `src` folder
-by including it, with the C preprocessing directive `#include'.
+#include <Servo.h>
+#include "ESC_Ogrodoot.h"
 
-```src/main.c
+ESC esc_right(ESC::MODE_FORWARD_BACKWARD);
+ESC esc_left(ESC::MODE_FORWARD_BACKWARD);
 
-#include "header.h"
-
-int main (void)
+void setup()
 {
- ...
+    esc_right.attach(9);
+    esc_left.attach(10);
 }
-```
 
-Including a header file produces the same results as copying the header file
-into each source file that needs it. Such copying would be time-consuming
-and error-prone. With a header file, the related declarations appear
-in only one place. If they need to be changed, they can be changed in one
-place, and programs that include the header file will automatically use the
-new version when next recompiled. The header file eliminates the labor of
-finding and changing all the copies as well as the risk that a failure to
-find one copy will result in inconsistencies within a program.
-
-In C, the usual convention is to give header files names that end with `.h'.
-It is most portable to use only letters, digits, dashes, and underscores in
-header file names, and at most one dot.
-
-Read more about using header files in official GCC documentation:
-
-* Include Syntax
-* Include Operation
-* Once-Only Headers
-* Computed Includes
-
-https://gcc.gnu.org/onlinedocs/cpp/Header-Files.html
+void loop()
+{
+    esc_right.setSpeed(0);
+    esc_left.setSpeed(0);
+    esc_right.setDirection(ESC::FORWARD);
+    esc_left.setDirection(ESC::FORWARD);
+    esc_right.setSpeed(30);
+    esc_left.setSpeed(30);
+    delay(1000);
+    esc_right.setSpeed(0);
+    esc_left.setSpeed(0);
+    esc_right.setDirection(ESC::BACKWARD);
+    esc_left.setDirection(ESC::BACKWARD);
+    esc_right.setSpeed(30);
+    esc_left.setSpeed(30);
+    delay(1000);
+}
